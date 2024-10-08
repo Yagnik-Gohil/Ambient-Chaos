@@ -14,12 +14,12 @@ Ambient Chaos is a web app that lets users create a personalized ambient sound e
 
 #### 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/ambient-chaos.git
+   git clone https://github.com/Yagnik-Gohil/Ambient-Chaos.git
    ```
 
 #### 2. Navigate to the project folder:
    ```bash
-   cd ambient-chaos
+   cd Ambient-Chaos
    ```
 
 #### 3. Install dependencies:
@@ -32,5 +32,4 @@ Ambient Chaos is a web app that lets users create a personalized ambient sound e
    npm run dev
    ```
 
-#### This project is inspired by <a href="https://neal.fun/ambient-chaos/" target="_blank" rel="noopener noreferrer">Ambient Chaos</a>.
-
+#### This project is inspired by [Ambient Chaos](https://neal.fun/ambient-chaos/).
