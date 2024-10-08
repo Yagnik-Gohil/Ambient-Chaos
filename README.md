@@ -32,4 +32,5 @@ Ambient Chaos is a web app that lets users create a personalized ambient sound e
    npm run dev
    ```
 
-#### This project is inspired by [Ambient Chaos](https://neal.fun/ambient-chaos/).
+#### This project is inspired by <a href="https://neal.fun/ambient-chaos/" target="_blank" rel="noopener noreferrer">Ambient Chaos</a>.
+

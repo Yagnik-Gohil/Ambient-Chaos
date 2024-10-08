@@ -11,6 +11,7 @@ import casinoSvg from "./assets/svg/casino.svg";
 import fireworkSvg from "./assets/svg/firework.svg";
 import coffeeSvg from "./assets/svg/coffee.svg";
 import highwaySvg from "./assets/svg/highway.svg";
+import githubSvg from "./assets/svg/github.svg";
 
 import rainMp3 from "./assets/audio/rain.mp3";
 import wavesMp3 from "./assets/audio/waves.mp3";
@@ -93,7 +94,9 @@ function App() {
                 className="w-16 h-16 mb-4 animate-bounce-alternate-1"
               />
             </div>
-            <p className="text-2xl font-bold protest-strike-regular">Elevate the volume!</p>
+            <p className="text-2xl font-bold protest-strike-regular">
+              Elevate the volume!
+            </p>
             <p className="text-lg mt-2 font-bold">
               "Rain" and "Lo-fi Beats" are pure bliss.
               <br />
@@ -108,6 +111,16 @@ function App() {
           </div>
         </div>
       )}
+
+      <div className="z-[1] py-10">
+        <a href="https://github.com/Yagnik-Gohil/Ambient-Chaos" target="_blank">
+          <img
+            src={githubSvg}
+            alt="Github Icon"
+            className="w-16 h-16 mb-4 filter invert"
+          />
+        </a>
+      </div>
     </div>
   );
 }
