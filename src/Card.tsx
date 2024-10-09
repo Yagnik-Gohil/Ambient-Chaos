@@ -16,7 +16,7 @@ const Card = ({
   useEffect(() => {
     // If audio exists, play or pause based on value
     if (audioRef.current) {
-      if (value > 0) {
+      if (value > 2) {
         audioRef.current.volume = value / 100; // Adjust volume based on slider value
         audioRef.current.play();
       } else {
@@ -33,21 +33,22 @@ const Card = ({
           className="md:w-20 md:h-20 w-10 h-10 filter invert"
           alt={name}
         />
-        <p className="pt-1">{name}</p>
+        <p className="pt-1 text-green-400">{name}</p>
       </div>
       <CircularSlider
         max={100}
         labelColor="#FFF"
-        knobColor="#0e7490"
-        progressColorFrom="#a5f3fc"
-        progressColorTo="#0891b2"
-        progressSize={window.innerWidth < 768 ? 9 : 18}
+        knobColor="#166534"
+        progressColorFrom="#86efac"
+        progressColorTo="#16a34a"
+        progressSize={window.innerWidth < 768 ? 6 : 16}
         trackColor="#FFF"
-        trackSize={window.innerWidth < 768 ? 9 : 18}
+        trackSize={window.innerWidth < 768 ? 6 : 16}
         dataIndex={0}
         onChange={(val: number) => changeValue(val)}
-        width={window.innerWidth < 768 ? 120 : 210}
+        width={window.innerWidth < 768 ? 140 : 200}
         hideLabelValue={true}
+        knobPosition={"bottom"}
       />
       {audio && <audio ref={audioRef} src={audio} loop />}
     </div>

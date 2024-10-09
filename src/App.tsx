@@ -26,7 +26,7 @@ import fireworksMp3 from "./assets/audio/fireworks.mp3";
 import coffeeMp3 from "./assets/audio/coffee.mp3";
 import highwayMp3 from "./assets/audio/highway.mp3";
 
-import auroraVideo from "./assets/aurora.mp4";
+import bg from "./assets/bg.png";
 import music1Svg from "./assets/svg/music-1.svg";
 import music2Svg from "./assets/svg/music-2.svg";
 import music3Svg from "./assets/svg/music-3.svg";
@@ -46,16 +46,13 @@ function App() {
       className="relative h-[100%] bg-black text-white flex flex-col p-4 items-center"
       onClick={handleInteraction}
     >
-      <video
+      <img
         className="fixed inset-0 top-0 h-full w-full object-cover"
-        src={auroraVideo}
-        autoPlay
-        loop
-        muted
+        src={bg}
       />
-      <div className="my-5 select-none sm:my-10 text-center z-[1]">
-        <p className="text-4xl sm:text-6xl yeseva-one-regular">AMBIENT</p>
-        <p className="text-6xl sm:text-8xl protest-strike-regular text-cyan-400">
+      <div className="my-5 select-none sm:my-8 text-center z-[1]">
+        <p className="text-5xl sm:text-6xl yeseva-one-regular">AMBIENT</p>
+        <p className="text-8xl sm:text-9xl protest-strike-regular text-green-400">
           CHAOS
         </p>
       </div>
@@ -104,7 +101,7 @@ function App() {
             </p>
             <button
               onClick={handleInteraction}
-              className="mt-6 bg-cyan-900 hover:bg-cyan-800 px-6 py-2 rounded-lg font-semibold transition duration-300"
+              className="mt-6 bg-green-900 hover:bg-green-800 px-6 py-2 rounded-lg font-semibold transition duration-300"
             >
               Got it!
             </button>
