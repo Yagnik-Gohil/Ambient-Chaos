@@ -1,103 +1,177 @@
+"use client";
+
+const rainSvg = "/svg/rain.svg";
+const wavesSvg = "/svg/waves.svg";
+const musicSvg = "/svg/music.svg";
+const campfireSvg = "/svg/campfire.svg";
+const windSvg = "/svg/wind.svg";
+const forestSvg = "/svg/forest.svg";
+const playgroundSvg = "/svg/playground.svg";
+const circusSvg = "/svg/circus.svg";
+const casinoSvg = "/svg/casino.svg";
+const fireworkSvg = "/svg/firework.svg";
+const coffeeSvg = "/svg/coffee.svg";
+const highwaySvg = "/svg/highway.svg";
+const githubSvg = "/svg/github.svg";
+
+const pianoSvg = "/svg/piano.svg";
+const acousticSvg = "/svg/acoustic-guitar.svg";
+const spanishSvg = "/svg/spanish-guitar.svg";
+const violinSvg = "/svg/violin.svg";
+const fluteSvg = "/svg/flute.svg";
+const drummerSetSvg = "/svg/drummer-set.svg";
+
+const rainMp3 = "/audio/rain.mp3";
+const wavesMp3 = "/audio/waves.mp3";
+const lofiMp3 = "/audio/lofi.mp3";
+const campfireMp3 = "/audio/campfire.mp3";
+const windMp3 = "/audio/wind.mp3";
+const forestMp3 = "/audio/forest.mp3";
+
+const playgroundMp3 = "/audio/playground.mp3";
+const carnivalMp3 = "/audio/carnival.mp3";
+const casinoMp3 = "/audio/casino.mp3";
+const fireworksMp3 = "/audio/fireworks.mp3";
+const coffeeMp3 = "/audio/coffee.mp3";
+const highwayMp3 = "/audio/highway.mp3";
+
+const beethovenMp3 = "/audio/beethoven.mp3";
+const guitarMp3 = "/audio/guitar-summer-walk.mp3";
+const spanishMp3 = "/audio/spanish-the-lively-dancer.mp3";
+const violinMp3 = "/audio/bach-violin-concerto-in-a-minor-3-movement.mp3";
+const fluteMp3 = "/audio/indian-flute.mp3";
+const drumsMp3 = "/audio/drums.mp3";
+
+const bg = "/bg.png";
+const music1Svg = "/svg/music-1.svg";
+const music2Svg = "/svg/music-2.svg";
+const music3Svg = "/svg/music-3.svg";
+
+import { useState } from "react";
+import Title from "@/components/Title";
+import Card from "@/components/Card";
 import Image from "next/image";
 
-export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+export default function App() {
+  const [hasInteracted, setHasInteracted] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+  // Function to handle user interaction, hides the popup
+  const handleInteraction = () => {
+    setHasInteracted(true); // Hide the popup after interaction
+  };
+
+  return (
+    <div
+      className="relative h-[100%] bg-black text-white flex flex-col p-4 items-center"
+      onClick={handleInteraction}
+    >
+      <Image
+        className="fixed inset-0 top-0 h-full w-full object-cover"
+        src={bg}
+        alt="Background Image"
+        width={100}
+        height={100}
+        unoptimized
+      />
+      <div className="my-5 select-none sm:my-8 text-center z-[1]">
+        <p className="text-5xl sm:text-6xl yeseva-one-regular">AMBIENT</p>
+        <p className="text-8xl sm:text-9xl protest-strike-regular text-green-400">
+          CHAOS
+        </p>
+      </div>
+      <Title title="NATURE" />
+      <div className="grid grid-cols-2 gap-10 sm:my-10 sm:grid-cols-3 sm:gap-30 md:gap-24 protest-strike-regular">
+        <Card icon={rainSvg} name={"Rain"} audio={rainMp3} />
+        <Card icon={musicSvg} name={"Lo-fi Beats"} audio={lofiMp3} />
+        <Card icon={wavesSvg} name={"Waves"} audio={wavesMp3} />
+        <Card icon={campfireSvg} name={"Campfire"} audio={campfireMp3} />
+        <Card icon={windSvg} name={"Wind"} audio={windMp3} />
+        <Card icon={forestSvg} name={"Forest"} audio={forestMp3} />
+      </div>
+      <Title title="MUSIC INSTRUMENTS" />
+      <div className="grid grid-cols-2 gap-10 sm:my-10 sm:grid-cols-3 sm:gap-30 md:gap-24 protest-strike-regular">
+        <Card icon={pianoSvg} name={"Piano"} audio={beethovenMp3} />
+        <Card icon={acousticSvg} name={"Acoustic Guitar"} audio={guitarMp3} />
+        <Card icon={spanishSvg} name={"Spanish Guitar"} audio={spanishMp3} />
+        <Card icon={violinSvg} name={"Violin"} audio={violinMp3} />
+        <Card icon={fluteSvg} name={"Flute"} audio={fluteMp3} />
+        <Card icon={drummerSetSvg} name={"Drums"} audio={drumsMp3} />
+      </div>
+      <Title title="OTHER" />
+      <div className="grid grid-cols-2 gap-10 sm:my-10 sm:grid-cols-3 sm:gap-30 md:gap-24 protest-strike-regular">
+        <Card icon={playgroundSvg} name={"Playground"} audio={playgroundMp3} />
+        <Card icon={circusSvg} name={"Circus"} audio={carnivalMp3} />
+        <Card icon={casinoSvg} name={"Casino"} audio={casinoMp3} />
+        <Card icon={fireworkSvg} name={"Firework"} audio={fireworksMp3} />
+        <Card icon={coffeeSvg} name={"Coffee Shop"} audio={coffeeMp3} />
+        <Card icon={highwaySvg} name={"Highway"} audio={highwayMp3} />
+      </div>
+
+      {!hasInteracted && (
+  <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
+    <div className="popup-container bg-gradient-to-tr from-green-800 via-green-600 to-green-400 bg-opacity-80 backdrop-blur-md rounded-3xl shadow-[0_0_50px_rgba(0,255,128,0.5)] text-white p-8 text-center animate-fade-in scale-90 hover:scale-100 transition-transform duration-500">
+      {/* Floating Icons */}
+      <div className="flex justify-center space-x-4 mb-4">
+        <Image
+          width={100}
+          height={100}
+          src={music1Svg}
+          alt="Music Icon"
+          className="w-16 h-16 animate-bounce-slow"
+          unoptimized
+        />
+        <Image
+          width={100}
+          height={100}
+          src={music2Svg}
+          alt="Music Icon"
+          className="w-16 h-16 animate-bounce-slower"
+          unoptimized
+        />
+        <Image
+          width={100}
+          height={100}
+          src={music3Svg}
+          alt="Music Icon"
+          className="w-16 h-16 animate-bounce-slow"
+          unoptimized
+        />
+      </div>
+
+      {/* Titles */}
+      <p className="text-3xl sm:text-4xl font-bold protest-strike-regular mb-2 animate-pulse text-green-300">
+        Elevate the volume!
+      </p>
+      <p className="text-lg sm:text-xl font-semibold">
+        &quot;Rain&quot; and &quot;Lo-fi Beats&quot; are pure bliss.
+        <br />
+        For the best experience, use headphones!
+      </p>
+
+      {/* Button */}
+      <button
+        onClick={handleInteraction}
+        className="mt-6 bg-green-900 hover:bg-green-800 px-6 py-3 rounded-xl font-semibold text-lg shadow-lg shadow-green-500/50 hover:shadow-green-400/70 transition-all duration-300 animate-pulse"
+      >
+        Got it!
+      </button>
+    </div>
+  </div>
+)}
+
+
+      <div className="z-[1] py-10">
+        <a href="https://github.com/Yagnik-Gohil/Ambient-Chaos" target="_blank">
           <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+            width={100}
+            height={100}
+            src={githubSvg}
+            alt="Github Icon"
+            className="w-16 h-16 mb-4 filter invert"
+            unoptimized
           />
-          Learn
         </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
     </div>
   );
 }
