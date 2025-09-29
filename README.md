@@ -7,8 +7,7 @@ Ambient Chaos is a web app that lets users create a personalized ambient sound e
 ## Tech Stack
 - **Next JS**: For building the interactive user interface
 - **Tailwind CSS**: Provides styling and responsive design
-- **HTML5 Audio & Video**: Handles audio playback and video background
-- **@fseehawer/react-circular-slider**: Volume control via an intuitive circular slider
+- **HTML5 Audio & Video**: Handles audio playback
 
 ## Installation
 
