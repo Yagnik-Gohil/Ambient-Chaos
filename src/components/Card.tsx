@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
@@ -42,7 +44,6 @@ const Card = ({ icon, name, audio }: CardProps) => {
   const center = size / 2;
   const radius = (size - strokeWidth) / 2;
 
-  // Value ↔ angle conversion (start at bottom)
   const valueToAngle = (val: number) => (val / 100) * 2 * Math.PI + Math.PI / 2;
   const angleToValue = (angle: number) => {
     let val = ((angle - Math.PI / 2) / (2 * Math.PI)) * 100;
@@ -51,29 +52,55 @@ const Card = ({ icon, name, audio }: CardProps) => {
     return val;
   };
 
-  // Mouse drag
-  const handleMouseMove = (e: MouseEvent) => {
-    if (!dragging || !svgRef.current) return;
+  const updateValueFromEvent = (clientX: number, clientY: number) => {
+    if (!svgRef.current) return;
     const rect = svgRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left - center;
-    const y = e.clientY - rect.top - center;
+    const x = clientX - rect.left - center;
+    const y = clientY - rect.top - center;
     const angle = Math.atan2(y, x);
     const val = angleToValue(angle);
     setValue(val);
   };
-  const handleMouseUp = () => setDragging(false);
 
+  // Mouse handlers
+  const handleMouseMove = (e: MouseEvent) => {
+    if (!dragging) return;
+    updateValueFromEvent(e.clientX, e.clientY);
+  };
+
+  const handleTouchMove = (e: TouchEvent) => {
+    if (!dragging || e.touches.length === 0) return;
+    e.preventDefault(); // prevent page scroll
+    updateValueFromEvent(e.touches[0].clientX, e.touches[0].clientY);
+  };
+
+  const handleEnd = () => setDragging(false);
+
+  // Attach global listeners while dragging
   useEffect(() => {
     if (dragging) {
       window.addEventListener("mousemove", handleMouseMove);
-      window.addEventListener("mouseup", handleMouseUp);
+      window.addEventListener("mouseup", handleEnd);
+
+      window.addEventListener("touchmove", handleTouchMove, { passive: false });
+      window.addEventListener("touchend", handleEnd);
+      window.addEventListener("touchcancel", handleEnd);
     } else {
       window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("mouseup", handleEnd);
+
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleEnd);
+      window.removeEventListener("touchcancel", handleEnd);
     }
+
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("mouseup", handleEnd);
+
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleEnd);
+      window.removeEventListener("touchcancel", handleEnd);
     };
   }, [dragging]);
 
@@ -88,7 +115,21 @@ const Card = ({ icon, name, audio }: CardProps) => {
     }
   }, [value]);
 
-  // Knob position
+  // Attach touchstart with passive: false on SVG
+  useEffect(() => {
+    const handleTouchStart = (e: TouchEvent) => {
+      if (e.touches.length === 0) return;
+      e.preventDefault(); // prevent scrolling
+      setDragging(true);
+    };
+    const svgEl = svgRef.current;
+    if (!svgEl) return;
+    svgEl.addEventListener("touchstart", handleTouchStart, { passive: false });
+    return () => {
+      svgEl.removeEventListener("touchstart", handleTouchStart);
+    };
+  }, []);
+
   const angle = valueToAngle(value);
   const knobX = center + radius * Math.cos(angle);
   const knobY = center + radius * Math.sin(angle);
@@ -172,7 +213,7 @@ const Card = ({ icon, name, audio }: CardProps) => {
         <circle
           cx={knobX}
           cy={knobY}
-          r={knobDiameter / 6} // small dot
+          r={knobDiameter / 6}
           fill="#fff"
           pointerEvents="none"
         />
