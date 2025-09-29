@@ -10,18 +10,40 @@ interface CardProps {
 const Card = ({ icon, name, audio }: CardProps) => {
   const [value, setValue] = useState(0); // 0-100
   const [dragging, setDragging] = useState(false);
+  const [size, setSize] = useState(200);
+  const [strokeWidth, setStrokeWidth] = useState(16);
+  const [knobDiameter, setKnobDiameter] = useState(28);
+
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const svgRef = useRef<SVGSVGElement | null>(null);
 
-  const size = 200; // SVG width/height
-  const strokeWidth = 16;
-  const knobDiameter = 28; // bigger than stroke
-  const radius = (size - strokeWidth) / 2;
+  // Responsive sizing
+  useEffect(() => {
+    const updateSize = () => {
+      if (window.innerWidth < 640) {
+        setSize(140);
+        setStrokeWidth(10);
+        setKnobDiameter(22);
+      } else if (window.innerWidth < 1024) {
+        setSize(180);
+        setStrokeWidth(14);
+        setKnobDiameter(24);
+      } else {
+        setSize(220);
+        setStrokeWidth(16);
+        setKnobDiameter(28);
+      }
+    };
+    updateSize();
+    window.addEventListener("resize", updateSize);
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+
   const center = size / 2;
+  const radius = (size - strokeWidth) / 2;
 
-  // Convert value (0-100) to angle in radians, start at bottom
+  // Value ↔ angle conversion (start at bottom)
   const valueToAngle = (val: number) => (val / 100) * 2 * Math.PI + Math.PI / 2;
-
   const angleToValue = (angle: number) => {
     let val = ((angle - Math.PI / 2) / (2 * Math.PI)) * 100;
     if (val < 0) val += 100;
@@ -29,6 +51,7 @@ const Card = ({ icon, name, audio }: CardProps) => {
     return val;
   };
 
+  // Mouse drag
   const handleMouseMove = (e: MouseEvent) => {
     if (!dragging || !svgRef.current) return;
     const rect = svgRef.current.getBoundingClientRect();
@@ -38,7 +61,6 @@ const Card = ({ icon, name, audio }: CardProps) => {
     const val = angleToValue(angle);
     setValue(val);
   };
-
   const handleMouseUp = () => setDragging(false);
 
   useEffect(() => {
@@ -71,14 +93,13 @@ const Card = ({ icon, name, audio }: CardProps) => {
   const knobX = center + radius * Math.cos(angle);
   const knobY = center + radius * Math.sin(angle);
 
-  // SVG circle circumference
   const circumference = 2 * Math.PI * radius;
   const progress = (value / 100) * circumference;
 
   return (
-    <div className="relative w-[220px] h-[220px] flex items-center justify-center select-none">
+    <div className="relative flex items-center justify-center select-none w-full max-w-[250px] mx-auto">
       {/* Icon & Name */}
-      <div className="absolute flex flex-col items-center justify-center">
+      <div className="absolute flex flex-col items-center justify-center z-[1]">
         <Image
           src={icon}
           alt={name}
@@ -87,7 +108,7 @@ const Card = ({ icon, name, audio }: CardProps) => {
           unoptimized
           className="filter invert"
         />
-        <p className="pt-1 text-green-400 text-base">{name}</p>
+        <p className="pt-1 text-green-400 text-base sm:text-sm">{name}</p>
       </div>
 
       {/* Circular Slider */}
@@ -95,7 +116,7 @@ const Card = ({ icon, name, audio }: CardProps) => {
         ref={svgRef}
         width={size}
         height={size}
-        style={{ overflow: "visible" }}
+        style={{ overflow: "visible", display: "block", margin: "0 auto" }}
       >
         {/* Background Track */}
         <circle
@@ -118,7 +139,7 @@ const Card = ({ icon, name, audio }: CardProps) => {
           strokeDasharray={circumference}
           strokeDashoffset={circumference - progress}
           strokeLinecap="round"
-          transform={`rotate(90 ${center} ${center})`} // rotate so progress starts at bottom
+          transform={`rotate(90 ${center} ${center})`} // start at bottom
         />
 
         <defs>
@@ -128,26 +149,33 @@ const Card = ({ icon, name, audio }: CardProps) => {
           </linearGradient>
         </defs>
 
-        {/* Knob (rendered last so it's on top) */}
+        {/* Knob hit area */}
+        <circle
+          cx={knobX}
+          cy={knobY}
+          r={knobDiameter}
+          fill="transparent"
+          className={`cursor-grab ${dragging ? "cursor-grabbing" : ""}`}
+          onMouseDown={() => setDragging(true)}
+        />
+
+        {/* Visible knob */}
         <circle
           cx={knobX}
           cy={knobY}
           r={knobDiameter / 2}
           fill="#166534"
-          className="cursor-pointer"
-          onMouseDown={() => setDragging(true)}
+          pointerEvents="none"
         />
-        {/* Knob "burger" icon */}
-        <text
-          x={knobX}
-          y={knobY + 2} // center vertically
-          textAnchor="middle"
-          fontSize="12"
+
+        {/* Knob dot */}
+        <circle
+          cx={knobX}
+          cy={knobY}
+          r={knobDiameter / 6} // small dot
           fill="#fff"
-          fontWeight="bold"
-        >
-          ≡
-        </text>
+          pointerEvents="none"
+        />
       </svg>
 
       {/* Audio */}
