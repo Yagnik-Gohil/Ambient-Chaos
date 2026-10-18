@@ -1,0 +1,5 @@
+{
+  "permissions": {
+    "deny": ["Bash(*deploy.bat*)", "PowerShell(*deploy.bat*)"]
+  }
+}

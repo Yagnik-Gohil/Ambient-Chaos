@@ -42,3 +42,6 @@ next-env.d.ts
 package-lock.json
 ads.txt
 deploy.sh
+
+# personal deploy script (kept private)
+deploy.bat

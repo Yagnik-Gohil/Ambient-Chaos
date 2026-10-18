@@ -42,7 +42,7 @@ export default function RootLayout({
           content="Ambient, Chaos, Relaxing Sounds, Lo-fi, Rain, Nature, Music, Meditation"
         />
         <meta name="author" content="Yagnik Gohil" />
-        <meta name="robots" content="index, follow" />
+        <meta name="robots" content="noindex, nofollow" />
 
         {/* Open Graph / Social Sharing */}
         <meta property="og:title" content="Ambient Chaos" />
