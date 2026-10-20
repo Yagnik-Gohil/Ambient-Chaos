@@ -68,18 +68,7 @@ export default function RootLayout({
           name="twitter:image"
           content="https://ambient-chaos.yagnik.dev/preview.png"
         />
-        <meta
-          name="google-adsense-account"
-          content="ca-pub-3475130815736394"
-        ></meta>
         <title>Ambient Chaos</title>
-
-        {/* Google AdSense */}
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3475130815736394"
-          crossOrigin="anonymous"
-        ></script>
       </head>
       <body
         className={`${protestStrike.variable} ${yesevaOne.variable} antialiased`}
